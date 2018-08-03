@@ -1,19 +1,17 @@
 import React from 'react'
 import { ApolloConsumer } from 'react-apollo'
 
-let tmp_foo;
-let tmp_client;
 
 class Button extends React.PureComponent {
 	
 	render() {
-		const { foo, client } = this.props
+		const { captionActive, client } = this.props
 
 		return (
 			<button 
-				onClick={()=>client.writeData({data: {captionActive: !foo}})}
+				onClick={()=>client.writeData({data: {captionActive: !captionActive}})}
 			>
-				{ foo ? 'Disable':'Activate' }
+				{ captionActive ? 'Disable caption':'Activate caption' }
 			</button>
 		)
 	}
@@ -22,7 +20,7 @@ class Button extends React.PureComponent {
 
 class ConsumerComponent extends React.PureComponent {
 	render() {
-		const { foo , textVal, client } = this.props
+		const { captionActive , textVal, client } = this.props
 
 		return (
 			<div>
@@ -31,21 +29,21 @@ class ConsumerComponent extends React.PureComponent {
 					value={textVal}
 					onChange={(e) => client.writeData({data: {text: e.target.value}})}
 				/>
-				<Button client={client} foo={foo} />
+				<Button client={client} captionActive={captionActive} />
 			</div>
 		)
 	}
 }
 
 
-const Mutator = ({foo, textVal}) => {
+const Mutator = ({captionActive, textVal}) => {
 	return (
 		<div>
 			<ApolloConsumer>
 				{ (client) => 
 					<ConsumerComponent 
 						client={client} 
-						foo={foo} 
+						captionActive={captionActive}
 						textVal={textVal} 
 					/> 
 				}

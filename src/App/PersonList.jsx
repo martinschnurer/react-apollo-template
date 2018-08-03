@@ -10,6 +10,8 @@ const PersonRow = styled.div`
 
 const PersonContainer = styled.div`
 	display: grid;
+	padding: 15px 5px;
+
 	${PersonRow}:hover {
 		background-color: red;
 		cursor: pointer;

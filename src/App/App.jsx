@@ -1,8 +1,6 @@
 import React from 'react'
-import { ApolloConsumer } from 'react-apollo'
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
-import styled from 'styled-components'
 import Mutator from './Mutator'
 import PersonList from './PersonList'
 
@@ -25,19 +23,17 @@ const GET_PERSONS = gql`
 
 const queryFn = ({ loading, error, data }) => {
 	if (loading) {
-		return <div>loading...</div>
+		return <div>Loading...</div>
 	}
 	if (error) {
-		return <div> error </div>
+		console.log(error)
+		return <div> Some error occured. See console </div>
 	}
 
 	return (
 		<div>
-			{
-				data.captionActive 
-				&& <h1>Helllllooooo {data.text}</h1>
-			}
-			<Mutator foo={data.captionActive} textVal={data.text} />
+			{ data.captionActive && <h1>Hello {data.text}</h1> }
+			<Mutator captionActive={data.captionActive} textVal={data.text} />
 			<PersonList persons={data.persons} />
 		</div>
 	)
