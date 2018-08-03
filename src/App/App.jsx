@@ -3,19 +3,14 @@ import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import Mutator from './Mutator'
 import PersonList from './PersonList'
+import RemoteMutator from './RemoteMutator'
 
 const GET_PERSONS = gql`
   {
 	captionActive @client
 	text @client
 	persons {
-		id firstName lastName
-		address {
-			city
-			state
-			street
-			streetNumber
-		}
+		id firstName lastName birthday
 	}
   }
 `;
@@ -35,6 +30,7 @@ const queryFn = ({ loading, error, data }) => {
 			{ data.captionActive && <h1>Hello {data.text}</h1> }
 			<Mutator captionActive={data.captionActive} textVal={data.text} />
 			<PersonList persons={data.persons} />
+			<RemoteMutator />
 		</div>
 	)
 }

@@ -21,7 +21,8 @@ const PersonContainer = styled.div`
 class PersonList extends PC {
 	render() {
 		const { persons } = this.props
-	
+		console.log(persons)
+
 		return (
 			<PersonContainer>
 			{
